@@ -1,0 +1,19 @@
+#!/bin/bash
+cd ~/
+if [ ! -d ~/asio ]; then
+	yes | git clone https://github.com/chriskohlhoff/asio.git
+		
+fi
+
+cd /tmp
+if [ ! -d ~/dnp3 ]; then
+
+	yes | git clone https://github.com/automatak/dnp3.git
+fi
+cd ~/
+ssh outstation4.Grid.TCPFlooding 'bash -s' < dnp3v2install1.sh
+
+ssh outstation4.Grid.TCPFlooding 'source ~/.bashrc; echo "ASIO_HOME set to: $ASIO_HOME"'
+
+ssh outstation4.Grid.TCPFlooding 'bash -s' < dnp3v2install2.sh
+
