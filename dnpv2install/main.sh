@@ -1,15 +1,15 @@
 #!/bin/bash
-cd ~/
+
+cd 
 if [ ! -d ~/asio ]; then
 	yes | git clone https://github.com/chriskohlhoff/asio.git
 		
 fi
 
-cd /tmp
-if [ ! -d ~/dnp3 ]; then
+cd ~/tmp
+rm -rfv dnp3
+yes | git clone https://github.com/automatak/dnp3.git
 
-	yes | git clone https://github.com/automatak/dnp3.git
-fi
 cd ~/
 python DeterlabControl/nodecontrol/nodes.py  #to create a file /tmp/nodelist.txt that will contain list of exp. nodes
 while read line; do
