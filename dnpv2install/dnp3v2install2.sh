@@ -6,7 +6,7 @@ echo $ASIO_HOME
 
 echo "going inside dnp3 folder..."
 
-cd ~/tmp/dnp3
+cd dnp3
 
 echo "running git checkout..."
 git checkout 2.0.1

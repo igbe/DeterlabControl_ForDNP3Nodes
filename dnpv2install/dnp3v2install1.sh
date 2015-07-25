@@ -1,4 +1,5 @@
 #!/bin/bash
+
 cd ~/
 
 sudo apt-get install autoconf libtool g++ git -y
