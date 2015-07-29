@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import subprocess
-
+import argparse
 
 def sshwithcmd(node,command):
 	'''function for sshing into a node to run  a command which might include executing
@@ -22,7 +22,7 @@ def main():
 	host=args.node
 	time=args.time
 
-	command="cat /sys/class/net/eth0/statistics/tx_bytes"
+	command="cat /sys/class/net/eth3/statistics/tx_bytes"
 	command1="ip route get 10.1.1.1 | cut -b 14-17"
 
 	output,err=sshwithcmd(host,command)
