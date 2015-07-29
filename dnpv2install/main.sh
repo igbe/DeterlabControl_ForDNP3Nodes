@@ -5,8 +5,8 @@ if [ ! -d ~/asio ]; then
 	yes | git clone https://github.com/chriskohlhoff/asio.git
 		
 fi
-
-rm -rfv dnp3
+ssh control.Grid.TCPFlooding 'rm -rfv dnp3'
+#rm -rfv dnp3
 
 yes | git clone https://github.com/automatak/dnp3.git
 

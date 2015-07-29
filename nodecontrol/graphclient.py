@@ -1,10 +1,14 @@
 #!/usr/bin/python
 import argparse
 import subprocess
+<<<<<<< HEAD
 import datetime
 import time as tm
 from time import sleep
 
+=======
+import argparse
+>>>>>>> 08567b8b0e3ea9f01d7c1c42df288ccd2d2fe4a5
 
 def sshwithcmd(node,command):
 	'''function for sshing into a node to run  a command which might include executing
@@ -61,9 +65,21 @@ def main():
 	
 	host=args.node
 	time=args.time
+<<<<<<< HEAD
 	
 	task(host,time)
 	
+=======
+
+	command="cat /sys/class/net/eth3/statistics/tx_bytes"
+	command1="ip route get 10.1.1.1 | cut -b 14-17"
+
+	output,err=sshwithcmd(host,command)
+	output1,err=sshwithcmd(host,command1)
+
+	print output
+	print output1
+>>>>>>> 08567b8b0e3ea9f01d7c1c42df288ccd2d2fe4a5
 
 if __name__ == "__main__":
 	main()
