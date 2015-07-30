@@ -31,7 +31,7 @@ def task(host,time):
                 output,err=sshwithcmd(host,command)
 
                 command="cat /sys/class/net/%s/statistics/rx_bytes"%(output1[0:4])
-
+		output2,err=sshwithcmd(host,command)
 
                 y=int(output.strip('\n'))
                 y1=int(output2.strip('\n'))
@@ -47,7 +47,7 @@ def task(host,time):
                         prevy1=y1
                 print str(y)+","+ str(y1)+","+str(x)
 
-                sleep(1)
+                sleep(0.2)
                 i-=1
 
 def main():
@@ -62,14 +62,14 @@ def main():
 
         task(host,time)
 
-        command="cat /sys/class/net/eth3/statistics/tx_bytes"
-        command1="ip route get 10.1.1.1 | cut -b 14-17"
+#        command="cat /sys/class/net/eth3/statistics/tx_bytes"
+ #       command1="ip route get 10.1.1.1 | cut -b 14-17"
+#
+ #       output,err=sshwithcmd(host,command)
+  #      output1,err=sshwithcmd(host,command1)
 
-        output,err=sshwithcmd(host,command)
-        output1,err=sshwithcmd(host,command1)
-
-        print output
-        print output1
+   #     print output
+    #    print output1
 
 
 if __name__ == "__main__":
