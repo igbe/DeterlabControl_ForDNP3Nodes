@@ -15,7 +15,7 @@ to run this file in DeterLab iterate through the following steps:
     supply obiigbe91's username and password. This will download a copy of the repo (DeterlabControl) to your system 
 
 3.  cd DeterlabControl/dnpv2install
-4.  bash main
+4.  bash main.sh
     this should install dnpv2 on all your nodes
     
     
