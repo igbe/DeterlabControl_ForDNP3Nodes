@@ -19,11 +19,13 @@ to run this file in DeterLab iterate through the following steps:
     this should install dnpv2 on all your nodes
     
     
-    TODO:
+    NOTE--------->use main1.sh for step 4 until main.sh is corrected.<-----NOTE
+    
+    TODO--correction:
+    
     
     read line not working (main.sh)..it runs for only the first node in the attack list, then terminates.
     while read line; do
-    ssh $line.Grid.TCPFlooding 'bash -s' < ~/DeterlabControl/dnpv2install/dnp3$
-    ssh $line.Grid.TCPFlooding 'source ~/.bashrc; echo "ASIO_HOME set to: $ASI$
-    ssh $line.Grid.TCPFlooding 'bash -s' < ~/DeterlabControl/dnpv2install/dnp3$
+    node_install $line
+    echo "done with second"
 done < /tmp/nodelist.txt
