@@ -19,7 +19,7 @@ def main():
 	print "make sure you have updated the node.txt"
 	node,ip=get_node_ip("node.txt")
 	cmd="python pingclient.py %s %s"%(random.choice(node),random.choice(ip))
-	sshwithcmd("oigbe000@users.isi.deterlab.net",cmd)
+	sshwithcmd.sshwithcmd("oigbe000@users.isi.deterlab.net",cmd)
 
 
 if __name__ == "__main__":
