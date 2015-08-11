@@ -1,9 +1,8 @@
 #!/usr/bin/python
 import subprocess
 import argparse
-print "before import ssh"
 import sshwithcmd
-print "after import ssh"
+
 def main():
 	#print "make sure you have updated the node.txt"
 	
