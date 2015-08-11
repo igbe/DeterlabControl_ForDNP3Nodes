@@ -4,10 +4,10 @@ cd ~/
 export ASIO_HOME=/users/oigbe000/asio/asio/include
 echo $ASIO_HOME
 
-echo "going inside dnp3 folder..."
-
-cd dnp3
-
+#echo "going inside dnp3 folder..."
+cp -r dnp3 /tmp/
+#cd dnp3
+cd /tmp/dnp3
 echo "running git checkout..."
 git checkout 2.0.1
 
