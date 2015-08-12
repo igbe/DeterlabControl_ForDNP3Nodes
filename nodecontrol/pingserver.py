@@ -10,7 +10,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-# p=subprocess.Popen(["python", file1], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-# f = open('/tmp/nodelist.txt','r')
-# for i in f.readlines():
-# 	print i
