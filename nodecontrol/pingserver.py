@@ -1,8 +1,5 @@
 #!/usr/bin/python
 import sshwithcmd
-import subprocess
-import random
-
 
 def main():
 	cmd="python /users/oigbe000/DeterlabControl/nodecontrol/pingclient.py"#./DeterlabControl/nodecontrol/pingclient.py"
