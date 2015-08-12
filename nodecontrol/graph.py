@@ -19,7 +19,7 @@ def animate():
 	plt.ylabel('Number of Bytes Received              Number of Bytes Transmitted')
 		
 
-	graph_data=open('DeterlabControl/nodecontrol/statdata.txt','r').read()    # read data from DeterlabControl/nodecontrol/statdata.txt  which is the text file that holds the stats information gotten from the remote node
+	graph_data=open('statdata.txt','r').read()    # read data from DeterlabControl/nodecontrol/statdata.txt  which is the text file that holds the stats information gotten from the remote node
 	lines=graph_data.split('\n')	#split the lines in the txt file...this will create a list containing all of the lines in the txt file
 	for line in lines:
 		if len(line)>1:
@@ -63,12 +63,12 @@ def animate():
 def main():
 
 	parser = argparse.ArgumentParser(description="Plot the graph of a DeterLab node characteristics againsts time")
-	parser.add_argument("username", type=str, help="your deterlab username")
+	#parser.add_argument("username", type=str, help="your deterlab username")
 	parser.add_argument("node", type=str, help="the name of the deterlab node to graph")
 	parser.add_argument("time", type=int, help="the number of seconds to poll the node for stats.")#, default=60)
 	args = parser.parse_args()
 	
-	agent=args.username + "@users.isi.deterlab.net"
+	agent="oigbe000@users.isi.deterlab.net"
 	host=args.node
 	time=args.time
 	cmd="python DeterlabControl/nodecontrol/graphclient.py %s %d"%(host,time)
@@ -79,7 +79,7 @@ def main():
 	plt.suptitle('Bandwidth Utilization for %s'%(host.split(".")[0]),size=16)
 
 
-	myfile1 = open('DeterlabControl/nodecontrol/statdata.txt', 'w')
+	myfile1 = open('statdata.txt', 'w')
 	myfile1.write(output)
 	myfile1.close()
 	animate()
