@@ -1,0 +1,6 @@
+attacker,10.1.1.7
+master,10.1.1.2
+outstation1,10.1.1.3
+outstation2,10.1.1.4
+outstation3,10.1.1.5
+outstation4,10.1.1.6
