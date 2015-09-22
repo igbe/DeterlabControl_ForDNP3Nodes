@@ -1,76 +1,35 @@
 #!/usr/bin/python
-import argparse
-import subprocess
-import datetime
-import time as tm
-from time import sleep
-import argparse
+import subprocess		#this module is similar to sys used to parse commands to the sys
+import argparse			# this is used to pick up the arguments supplied to an excuted script
 
 
-def sshwithcmd(node,command):
-        '''function for sshing into a node to run  a command which might include executing
-        a script. Both node and scriptpath are string variables'''
-        cmd=str(command)
-        host=str(node)
-        p=subprocess.Popen(["ssh", "%s" % host, cmd], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+
+def getdata(host,time):
+    	cmd="python ~/DeterlabControl/nodecontrol/graphtest.py %s %d & python ~/DeterlabControl/nodecontrol/graphtest.py %s %d & python ~/DeterlabControl/nodecontrol/graphtest.py %s %d & python ~/DeterlabControl/nodecontrol/graphtest.py %s %d" %(host[0],time,host[1],time,host[2],time, host[3],time)
+	p=subprocess.Popen([cmd], shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
         (output, err) = p.communicate()
-        return output,err
-
-def task(host,time):
-
-        i=time
-        prevy=0
-        prevy1=0
-        print str(prevy)+","+ str(prevy1)+","+ str(tm.ctime())
-        while i>0:
-
-                command1="ip route get 10.1.1.1 | cut -b 14-17"
-                output1,err=sshwithcmd(host,command1)
-
-                command="cat /sys/class/net/%s/statistics/tx_bytes"%(output1[0:4])
-                output,err=sshwithcmd(host,command)
-
-                command="cat /sys/class/net/%s/statistics/rx_bytes"%(output1[0:4])
-		output2,err=sshwithcmd(host,command)
-
-                y=int(output.strip('\n'))
-                y1=int(output2.strip('\n'))
-                x=tm.ctime()
-
-                if y==prevy:
-                        y=0
-                else:
-                        prevy=y
-                if y1==prevy1:
-                        y1=0
-                else:
-                        prevy1=y1
-                print str(y)+","+ str(y1)+","+str(x)
-
-                sleep(0.2)
-                i-=1
-
+        print output,err
+	#return output
+	
 def main():
 
-        parser = argparse.ArgumentParser(description="Plot the graph of a DeterLab node characteristics againsts time")
-        parser.add_argument("node", type=str, help="the name of the deterlab node to graph")
-        parser.add_argument("time", type=int, help="the number of seconds to poll the node for stats.")#, default=60)
-        args = parser.parse_args()
-
-        host=args.node
-        time=args.time
-
-        task(host,time)
-
-#        command="cat /sys/class/net/eth3/statistics/tx_bytes"
- #       command1="ip route get 10.1.1.1 | cut -b 14-17"
-#
- #       output,err=sshwithcmd(host,command)
-  #      output1,err=sshwithcmd(host,command1)
-
-   #     print output
-    #    print output1
-
+	parser = argparse.ArgumentParser(description="Plot the graph of a DeterLab node characteristics againsts time")
+	#parser.add_argument("username", type=str, help="your deterlab username")
+	parser.add_argument("node1", type=str, help="the name of the 1st deterlab node to graph e.g master")
+	parser.add_argument("node2", type=str, help="the name of the 2nd deterlab node to graph e.g oustation")
+	parser.add_argument("node3", type=str, help="the name of the 3rd deterlab node to graph e.g attacker")
+	parser.add_argument("node4", type=str, help="the name of the 4th deterlab node to graph e.g control")
+	parser.add_argument("time", type=int, help="the number of seconds to poll the node for stats.")#, default=60)
+	args = parser.parse_args()
+	
+	
+	host=["%s.grid.tcpflooding"%(args.node1),"%s.grid.tcpflooding"%(args.node2),"%s.grid.tcpflooding"%(args.node3),"%s.grid.tcpflooding"%(args.node4)]
+	time=args.time
+	getdata(host,time)
 
 if __name__ == "__main__":
         main()
+	
+
+
