@@ -1,5 +1,8 @@
 to run graph.py
 
-1) navigate to DeterlabControl/nodecontrol/
-2) run ---->  sudo python graph.py "master.Grid.TCPFlooding" 10
+Navigate to DeterlabControl/nodecontrol/
+
+First remember the graph needs 4 arguments
+run ---->  python graph.py master outstation1 outstation2 outstation3 10
    where 10 is the time in seconds
+   
