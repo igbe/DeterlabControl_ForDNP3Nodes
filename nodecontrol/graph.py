@@ -6,10 +6,10 @@ import matplotlib.pyplot as plt  #module for the graphing
 import numpy as np
 import matplotlib.animation as animation
 import datetime			#module for timing
+from matplotlib import dates
 
-
-def animate(val):
-	print val
+def animate(val,name):
+	#print val
 	x1=[]
 	y1=[]
 	y11=[]
@@ -26,13 +26,27 @@ def animate(val):
 	y4=[]
 	y44=[]
 	
-	ax1=plt.subplot2grid((2,2),(0,0))#,rowspan=1,colspan=1)     # create a subplot which will be a 1X1
+	ax1 = plt.subplot2grid((2,2),(0,0))#,rowspan=1,colspan=1)     # create a subplot which will be a 1X1
 	ax2 = plt.subplot2grid((2,2), (0,1))
 	ax3 = plt.subplot2grid((2,2), (1,0))
 	ax4 = plt.subplot2grid((2,2), (1,1))
+
+	ax1.set_title(name[0])
+	ax2.set_title(name[1])
+	ax3.set_title(name[2])
+	ax4.set_title(name[3])
+	
+	#plt.xticks(rotation='vertical')
+	
+	ax1.set_xticklabels([])
+	ax2.set_xticklabels([])
+	ax3.set_xticklabels([])
+	ax4.set_xticklabels([])
+	#plt.subplots_adjust(bottom=.3)	
+
 	#plt.xlabel('TimeStamp')
 	#plt.ylabel('Number of Received bytes/sec              Number of Transmitted bytes/sec')
-	print val		
+	#print val		
 
 	# graph_data=open('statdata.txt','r').read()    # read data from DeterlabControl/nodecontrol/statdata.txt  which is the text file that holds the stats information gotten from the remote node
 	# lines=graph_data.split('\n')	#split the lines in the txt file...this will create a list containing all of the lines in the txt file
@@ -113,6 +127,18 @@ def animate(val):
 	ax2.grid(True)
 	ax3.grid(True)
 	ax4.grid(True)
+#Add x and y label
+	#ax1.set_xlabel('Timestamp')
+	ax1.set_ylabel('Bandwidth in bytes/s')
+
+	#ax2.set_xlabel('Timestamp')
+	ax2.set_ylabel('Bandwidth in bytes/s')
+
+	#ax3.set_xlabel('Timestamp')
+	ax3.set_ylabel('Bandwidth in bytes/s')
+
+	#ax4.set_xlabel('Timestamp')
+	ax4.set_ylabel('Bandwidth in bytes/s')
 
 # fill between the minimum value of y1, and all values of y1, the fill bewteen the maximum value of y2 (maximum cause y2 is inverted hence, its minimum becomes its maximum)
 # use dark green (no alpha value) for the tx 
@@ -129,6 +155,30 @@ def animate(val):
 	ax4.fill_between(x4,0,y44,facecolor='#3F5D7D',alpha=0.5)
 	
 	plt.show()
+def getdata(out):
+	L=len(out)
+	i=0
+	data=[]
+	name=[]
+	prev=0
+	while i < L:
+		#print i
+		if out[i]=="":
+			data.append(out[prev:i])
+			name.append(out[i+1])
+			prev=i+2
+			i+=1
+			#print "seen empty space" 
+			#print 'out[i-1] is ',out[i-1],'out[i] is ',out[i],'out[i+1] is ',out[i+1]
+
+		i+=1
+	data.remove([])
+	name.remove('')
+	#print data
+	#print name	
+	return data,name
+
+
 k=0
 def main():
 	global k
@@ -151,37 +201,18 @@ def main():
 	cmd="python ~/DeterlabControl/nodecontrol/graphclient.py %s %s %s %s %d"%(host1,host2,host3,host4,time)
 	output, error= sshwithcmd.sshwithcmd(agent, cmd)
 	#print output
-	val=[]
-
-	out=output.split("]")
-	
-	for i in 0,1,2,3 :
-		
-		if i==0:
-			val.append(out[0][2:-3].split("\\n', '"))
-				
-		if i==1:
-			val.append(out[1][3:-3].split("\\n', '"))
-					
-		if i==2:
-			val.append(out[2][3:-3].split("\\n', '"))
-						
-		if i==3:
-			val.append(out[3][3:-3].split("\\n', '"))
-			
-			
-		
-	
-	fig =plt.figure()
+	out=output.split("\n")
+	#print out
+	data,name=getdata(out)
+	# fig =plt.figure()
 	#plt.suptitle('Bandwidth Utilization for %s'%(host.split(".")[0]),size=16)
 
 
-	animate(val)
+	animate(data,name)
 
 
 if __name__ == "__main__":
 	main()
-
 
 
 
