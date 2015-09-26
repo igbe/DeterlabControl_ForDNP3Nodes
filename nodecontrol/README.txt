@@ -1,3 +1,10 @@
+Dependencies:
+
+Matplotlib 1.4.3
+
+
+
+
 to run graph.py
 
 Navigate to DeterlabControl/nodecontrol/
