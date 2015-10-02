@@ -4,14 +4,18 @@ import argparse			# this is used to pick up the arguments supplied to an excuted
 
 
 
-
 def getdata(host,time):
-    	cmd="python ~/DeterlabControl/nodecontrol/graphtest.py %s %d & python ~/DeterlabControl/nodecontrol/graphtest.py %s %d & python ~/DeterlabControl/nodecontrol/graphtest.py %s %d & python ~/DeterlabControl/nodecontrol/graphtest.py %s %d" %(host[0],time,host[1],time,host[2],time, host[3],time)
-	p=subprocess.Popen([cmd], shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        cmd="python ~/DeterlabControl/nodecontrol/graphtest.py %s %d & python ~/DeterlabControl/nodecontrol/graphtest.py %s %d & python ~/DeterlabControl/nodecontrol/graphtest.py %s %d & python ~/DeterlabControl/nodecontrol/graphtest.py %s %d" %(host[0],time,host[1],time,host[2],time, host[3],time)
+        p=subprocess.Popen([cmd], shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
         (output, err) = p.communicate()
         print output,err
-	#return output
-	
+        #return output
+
+
+
+
+
+
 def main():
 
 	parser = argparse.ArgumentParser(description="Plot the graph of a DeterLab node characteristics againsts time")
@@ -31,5 +35,4 @@ def main():
 if __name__ == "__main__":
         main()
 	
-
 
