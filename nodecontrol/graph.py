@@ -143,16 +143,16 @@ def animate(val,name):
 # fill between the minimum value of y1, and all values of y1, the fill bewteen the maximum value of y2 (maximum cause y2 is inverted hence, its minimum becomes its maximum)
 # use dark green (no alpha value) for the tx 
 	ax1.fill_between(x1,0,y1,facecolor='green',alpha=0.5)
-	ax1.fill_between(x1,0,y11,facecolor='#3F5D7D',alpha=0.5)
+	ax1.fill_between(x1,0,y11,facecolor='blue',alpha=0.5)
 
 	ax2.fill_between(x2,0,y2,facecolor='green',alpha=0.5)
-	ax2.fill_between(x2,0,y22,facecolor='#3F5D7D',alpha=0.5)
+	ax2.fill_between(x2,0,y22,facecolor='blue',alpha=0.5)
 
 	ax3.fill_between(x3,0,y3,facecolor='green',alpha=0.5)
-	ax3.fill_between(x3,0,y33,facecolor='#3F5D7D',alpha=0.5)
+	ax3.fill_between(x3,0,y33,facecolor='blue',alpha=0.5)
 
 	ax4.fill_between(x4,0,y4,facecolor='green',alpha=0.5)
-	ax4.fill_between(x4,0,y44,facecolor='#3F5D7D',alpha=0.5)
+	ax4.fill_between(x4,0,y44,facecolor='blue',alpha=0.5)
 	
 	plt.show()
 def getdata(out):
@@ -160,20 +160,21 @@ def getdata(out):
 	i=0
 	data=[]
 	name=[]
+	nodes=['master','outstation1','outstation2','outstation3','outstation4', 'attacker']
 	prev=0
 	while i < L:
 		#print i
-		if out[i]=="":
+		if out[i] in nodes:
 			data.append(out[prev:i])
-			name.append(out[i+1])
-			prev=i+2
+			name.append(out[i])
+			prev=i+1
 			i+=1
 			#print "seen empty space" 
 			#print 'out[i-1] is ',out[i-1],'out[i] is ',out[i],'out[i+1] is ',out[i+1]
-
-		i+=1
-	data.remove([])
-	name.remove('')
+		else:
+			i+=1
+	#data.remove([])
+	#name.remove('')
 	#print data
 	#print name	
 	return data,name
@@ -203,6 +204,8 @@ def main():
 	#print output
 	out=output.split("\n")
 	#print out
+	#out1=out.split("~")
+	#print out1
 	data,name=getdata(out)
 	# fig =plt.figure()
 	#plt.suptitle('Bandwidth Utilization for %s'%(host.split(".")[0]),size=16)
@@ -213,7 +216,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-
-
-
-
