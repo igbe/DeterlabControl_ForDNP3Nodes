@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.animation as animation
 import datetime			#module for timing
 from matplotlib import dates
-
+import random
 def animate(val,name):
 	#print val
 	x1=[]
@@ -88,6 +88,39 @@ def animate(val,name):
 	#print y1
 	#print y2
 	#print x1
+	
+	r=[]
+	r.append(len(x1))
+	r.append(len(x2))
+	r.append(len(x3))
+	r.append(len(x4))
+	k=r
+	k.sort()
+	#r.sort()
+	m=r.index(min(r))
+	if (r[m])!=(k[1]):
+		print "running modification for less"
+		u={0:x1,1:x2,2:x3,3:x4}
+		u0={0:y1,1:y2,2:y3,3:y4}
+		u00={0:y11,1:y22,2:y33,3:y44}
+		L=len(u[0])-r[m]
+		u1={0:x1,1:x2,2:x3,3:x4}
+		u2={0:y1,1:y2,2:y3,3:y4}
+		u3={0:y11,1:y22,2:y33,3:y44}
+
+		u.pop(m)
+		u0.pop(m)
+		u00.pop(m)
+		f=[0,1,2,3]
+		f.pop(m)
+		q=random.choice(f)
+		for i in range(r[m],len(u[q])):
+			u1[m].append(u[q][i])
+			u2[m].append(0)#u0[q][i])
+			u3[m].append(0)#u00[q][i])
+
+
+
 
 #to convert the lists y1,y2 and x1 to an array. this is only necessary cause we want to fill some sections of it with color. else plotting the list without
 # converting to np.array will work too but can only be used to line plots without fill. Note also, that if the timestamp(x) was a normal value, then we also
@@ -201,10 +234,12 @@ def main():
 	time=args.time
 	cmd="python ~/DeterlabControl/nodecontrol/graphclient.py %s %s %s %s %d"%(host1,host2,host3,host4,time)
 	output, error= sshwithcmd.sshwithcmd(agent, cmd)
+	#out=['87,158,Tue Oct 06 10:40:08 2015', '0,0,Tue Oct 06 10:40:09 2015', '87,158,Tue Oct 06 10:40:10 2015', '0,0,Tue Oct 06 10:40:11 2015', '87,158,Tue Oct 06 10:40:12 2015','87,158,Tue Oct 06 10:40:13 2015', '93,155,Tue Oct 06 10:40:14 2015', '87,158,Tue Oct 06 10:40:15 2015', '0,0,Tue Oct 06 10:40:16 2015', '87,158,Tue Oct 06 10:40:17 2015', '0,0,Tue Oct 06 10:40:18 2015', '87,158,Tue Oct 06 10:40:20 2015', '0,0,Tue Oct 06 10:40:21 2015', '87,158,Tue Oct 06 10:40:22 2015', '0,0,Tue Oct 06 10:40:23 2015','87,158,Tue Oct 06 10:40:24 2015', '140,70,Tue Oct 06 10:40:25 2015', '0,0,Tue Oct 06 10:40:26 2015', 'outstation1', '0,0,Tue Oct 06 10:40:08 2015', '0,0,Tue Oct 06 10:40:09 2015', '0,0,Tue Oct 06 10:40:10 2015', '0,0,Tue Oct 06 10:40:11 2015', '0,0,Tue Oct 06 10:40:12 2015', '0,0,Tue Oct 06 10:40:13 2015', '0,0,Tue Oct 06 10:40:15 2015','0,0,Tue Oct 06 10:40:16 2015', '0,0,Tue Oct 06 10:40:17 2015', '0,0,Tue Oct 06 10:40:18 2015', '0,0,Tue Oct 06 10:40:19 2015', '0,0,Tue Oct 06 10:40:20 2015', '0,0,Tue Oct 06 10:40:21 2015', '0,0,Tue Oct 06 10:40:22 2015', '0,0,Tue Oct 06 10:40:23 2015', '0,0,Tue Oct 06 10:40:24 2015', '0,0,Tue Oct 06 10:40:25 2015', '0,0,Tue Oct 06 10:40:26 2015', '0,0,Tue Oct 06 10:40:27 2015', '0,0,Tue Oct 06 10:40:28 2015', '0,0,Tue Oct 06 10:40:29 2015', '0,0,Tue Oct 06 10:40:30 2015', '0,0,Tue Oct 06 10:40:31 2015', '0,0,Tue Oct 06 10:40:32 2015', '0,0,Tue Oct 06 10:40:33 2015', '0,0,Tue Oct 06 10:40:34 2015', '0,0,Tue Oct 06 10:40:35 2015', '0,0,Tue Oct 06 10:40:36 2015', '0,0,Tue Oct 06 10:40:37 2015', '0,0,Tue Oct 06 10:40:38 2015', 'outstation2', '0,0,Tue Oct 06 10:40:08 2015', '158,87,Tue Oct 06 10:40:09 2015', '0,0,Tue Oct 06 10:40:10 2015', '158,87,Tue Oct 06 10:40:11 2015', '0,0,Tue Oct 06 10:40:13 2015', '158,87,Tue Oct 06 10:40:14 2015', '155,93,Tue Oct 06 10:40:15 2015', '158,87,Tue Oct 06 10:40:16 2015', '0,0,Tue Oct 06 10:40:17 2015', '158,87,Tue Oct 06 10:40:18 2015', '0,0,Tue Oct 06 10:40:19 2015', '158,87,Tue Oct 06 10:40:20 2015', '0,0,Tue Oct 06 10:40:21 2015', '158,87,Tue Oct 06 10:40:22 2015', '0,0,Tue Oct 06 10:40:23 2015', '158,87,Tue Oct 06 10:40:24 2015', '70,140,Tue Oct 06 10:40:25 2015', '0,0,Tue Oct 06 10:40:26 2015', '78,64,Tue Oct 06 10:40:27 2015', '0,0,Tue Oct 06 10:40:28 2015', '78,64,Tue Oct 06 10:40:29 2015', '0,0,Tue Oct 06 10:40:30 2015', '0,0,Tue Oct 06 10:40:31 2015', '0,0,Tue Oct 06 10:40:32 2015', '78,64,Tue Oct 06 10:40:33 2015', '0,0,Tue Oct 06 10:40:34 2015', '0,0,Tue Oct 06 10:40:35 2015', '0,0,Tue Oct 06 10:40:36 2015', '0,0,Tue Oct 06 10:40:37 2015','78,0,Tue Oct 06 10:40:38 2015', 'master', '0,0,Tue Oct 06 10:40:08 2015', '0,0,Tue Oct 06 10:40:09 2015', '0,0,Tue Oct 06 10:40:10 2015', '0,0,Tue Oct 06 10:40:12 2015', '0,0,Tue Oct 06 10:40:13 2015', '0,0,Tue Oct 06 10:40:14 2015', '0,0,Tue Oct 06 10:40:15 2015', '0,0,Tue Oct 06 10:40:16 2015', '0,0,Tue Oct 06 10:40:17 2015', '0,0,Tue Oct 06 10:40:18 2015', '0,0,Tue Oct 06 10:40:19 2015', '0,0,Tue Oct 06 10:40:20 2015', '0,0,Tue Oct 06 10:40:21 2015', '0,0,Tue Oct 06 10:40:22 2015', '0,0,Tue Oct 06 10:40:23 2015', '0,0,Tue Oct 06 10:40:24 2015', '0,0,Tue Oct 06 10:40:25 2015', '0,0,Tue Oct 06 10:40:26 2015', '0,0,Tue Oct 06 10:40:27 2015', '0,0,Tue Oct 06 10:40:28 2015', '0,0,Tue Oct 06 10:40:29 2015', '0,0,Tue Oct 06 10:40:30 2015', '0,0,Tue Oct 06 10:40:31 2015', '0,0,Tue Oct 06 10:40:32 2015', '0,0,Tue Oct 06 10:40:33 2015', '0,0,Tue Oct 06 10:40:34 2015', '0,0,Tue Oct 06 10:40:35 2015', '0,0,Tue Oct 06 10:40:36 2015', '0,0,Tue Oct 06 10:40:37 2015', '0,0,Tue Oct 06 10:40:38 2015', 'attacker', '', '']
+
 	#print output
 	out=output.split("\n")
 	#print out
-	#out1=out.split("~")
+	
 	#print out1
 	data,name=getdata(out)
 	# fig =plt.figure()
@@ -216,3 +251,7 @@ def main():
 
 if __name__ == "__main__":
 	main()
+
+
+
+
